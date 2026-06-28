@@ -180,7 +180,7 @@ ssh-keygen -t ed25519 -C "ansible-automation"
     - `-t ed25519` → modern, secure key type (better than RSA)
     - `-C "ansible-automation"` → optional comment so you know which key it is
     - You'll see promtps like:
-    `Enter file in which to save the key (/home/<USER>/.ssh/id_ed25519):`
+    `Enter file in which to save the key (/home/<USER>/.ssh/ansible-automation):`
   - Press **Enter** to accept the default location.
   - When prompted for a passphrase, you can either:
     - Enter one (more secure, but you’ll type it for every run unless you use `ssh-agent`)
@@ -188,12 +188,17 @@ ssh-keygen -t ed25519 -C "ansible-automation"
 
 - Verify your keys
 ```bash
-ls -l ~/.ssh/id_ed25519*
+ls -l ~/.ssh/ansible-automation*
 ```
 
   - You should see two files:
-    - `id_ed25519` → private key (keep secret!)
-    - `id_ed25519.pub` → public key (what you copy to targets)
+    - `ansible-automation` → private key (keep secret!)
+    - `ansible-automation.pub` → public key (what you copy to targets)
+
+- Copy created public key to `/ansible/identity/automation/` folder
+```bash
+cp ~/.ssh/ansible-automation.pub ~/pp4-valkyrie/ansible/identity/automation/
+```
 
 - Install SSHPass on Control Node:
 ```bash
@@ -222,7 +227,7 @@ ssh pi@<target-host-ip>
 - Optional: Agent Forwarding (Handy for Ansible)
 ```bash
 eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
+ssh-add ~/.ssh/ansible-automation
 ```
 This lets Ansible use the key automatically
 
