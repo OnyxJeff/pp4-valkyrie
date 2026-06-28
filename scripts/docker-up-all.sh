@@ -1,9 +1,9 @@
 #!/bin/bash 
 # Run docker compose up -d in all docker project folders automatically 
-# For pp4-Valkyrie 
+# For potentpi4 
 set -e # Exit immediately on any error 
 
-DOCKER_BASE="$HOME/pp4-valkyrie"
+DOCKER_BASE="$HOME/potentpi4"
 
 echo "=== 🚀 Auto-starting all Docker Compose stacks under: $DOCKER_BASE ===" 
 
