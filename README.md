@@ -165,6 +165,11 @@ chmod +x docker-up-all.sh
 
 ## 🧪 Installing Ansible
 
+```bash
+cd ~/potentpi4
+git clone https://github.com/OnyxJeff/ansible.git
+```
+
 Please open the `ansible` folder and follow the Ansible `README.md` for this step
 
 ---
