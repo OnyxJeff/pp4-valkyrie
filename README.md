@@ -62,8 +62,8 @@ pp4-valkyrie/
 
 - Make log folders
 ```bash
-mkdir ~pp4-valkyrie/logs
-mkdir ~pp4-valkyrie/backup_logs
+mkdir ~/pp4-valkyrie/logs
+mkdir ~/pp4-valkyrie/backup_logs
 ```
 
 - Update and Upgrade the System via script:
