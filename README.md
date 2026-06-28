@@ -1,17 +1,17 @@
-# pp4-skadi
+# pp4-valkyrie
 
-![Build Status](https://github.com/OnyxJeff/pp4-skadi/actions/workflows/build.yml/badge.svg)
+![Build Status](https://github.com/OnyxJeff/pp4-valkyrie/actions/workflows/build.yml/badge.svg)
 ![Maintenance](https://img.shields.io/maintenance/yes/2026.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp4-skadi)
-![Issues](https://img.shields.io/github/issues/OnyxJeff/pp4-skadi)
+![GitHub release](https://img.shields.io/github/v/release/OnyxJeff/pp4-valkyrie)
+![Issues](https://img.shields.io/github/issues/OnyxJeff/pp4-valkyrie)
 
-**Skadi** is the internal playground server for my homelab, hosted on a Raspberry Pi 4.
+**Valkyrie** is the internal playground server for my homelab, hosted on a Raspberry Pi 4.
 
 ## 📁 Repo Structure
 
 ```text
-pp4-skadi/
+pp4-valkyrie/
 ├── .github/workflows/      # CI for YAML validation
 ├── backup_logs/            # Oldest logs from update script
 ├── dockprom/               # Docker container(s) for Prometheus Node Exporter for RPi
@@ -53,16 +53,22 @@ pp4-skadi/
   - Download repo
   ```bash
   cd
-  git clone https://github.com/OnyxJeff/pp4-skadi.git
+  git clone https://github.com/OnyxJeff/pp4-valkyrie.git
   ```
 
 ---
 
 ## ⚠️ Updating the OS
 
+- Make log folders
+```bash
+mkdir ~pp4-valkyrie/logs
+mkdir ~pp4-valkyrie/backup_logs
+```
+
 - Update and Upgrade the System via script:
 ```bash
-cd ~/pp4-skadi/scripts
+cd ~/pp4-valkyrie/scripts
 chmod +x apt-get-autoupdater.sh
 sudo ./apt-get-autoupdater.sh
 ```
@@ -77,25 +83,17 @@ sudo crontab -e
   - add the following to the bottom of the document:
   ```bash
   # OS-Auto-Updater
-    00 01 * * 0 bash $HOME/pp4-skadi/scripts/apt-get-autoupdater.sh
+    00 01 * * 0 bash $HOME/pp4-valkyrie/scripts/apt-get-autoupdater.sh
       # execute automatic update script and log every sunday at 01:00 am
-    50 00 1 * * /bin/bash -c 'cp $HOME/pp4-skadi/logs/apt-get-autoupdater.log $HOME/pp4-skadi/backup_logs/apt-get-autoupdater-$(date +\%Y\%m\%d).log'
+    50 00 1 * * /bin/bash -c 'cp $HOME/pp4-valkyrie/logs/apt-get-autoupdater.log $HOME/pp4-valkyrie/backup_logs/apt-get-autoupdater-$(date +\%Y\%m\%d).log'
       # saves monthly version of "apt-get-autoupdater.log" on the 1st of every month at 00:50 am
-    51 00 1 * * rm -f $HOME/pp4-skadi/logs/apt-get-autoupdater.log
+    51 00 1 * * rm -f $HOME/pp4-valkyrie/logs/apt-get-autoupdater.log
       # deletes old weekly log on the 1st of every month at 00:51 am
   ```
 
 ---
 
 ## 🖥️ Installing U6143_ssd1306 Display
-
-- Environmental configuration
-```bash
-sudo apt install make
-```
-```bash
-sudo apt install gcc
-```
 
 - Run setup_display_service.sh script
 ```bash
@@ -151,10 +149,11 @@ docker compose version
 
 ### 📝 Installing your first container(s)
 
-- Installing Dockprom (Prometheus Exporter)
+- Installing Container Stack (via script)
 ```bash
-cd ~/pp4-skadi/dockprom
-docker compose up -d
+cd ~/pp4-valkyrie/scripts
+chmod +x docker-up-all.sh
+./docker-up-all.sh
 ```
 
 ---
@@ -168,6 +167,10 @@ ansible --version
 ```
 
 - Generate an SSH Key Pair
+
+> [!IMPORTANT]
+> Skip to "Verify your keys" section if you imported a private key from another machine
+
 ```bash
 ssh-keygen -t ed25519 -C "ansible@homelab"
 ```
@@ -181,7 +184,7 @@ ssh-keygen -t ed25519 -C "ansible@homelab"
     - Enter one (more secure, but you’ll type it for every run unless you use `ssh-agent`)
     - Leave empty (convenient for automated playbooks)
 
-- Verify you keys
+- Verify your keys
 ```bash
 ls -l ~/.ssh/id_ed25519*
 ```
