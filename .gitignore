@@ -4,4 +4,4 @@ secrets/
 *.env
 *.ini
 *.secret
-ansible/
+/ansible/
