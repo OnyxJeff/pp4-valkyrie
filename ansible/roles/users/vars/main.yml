@@ -1,6 +1,0 @@
----
-default_users:
-  - name: jeff
-    shell: /bin/bash
-    groups: sudo
-    ssh_key: "<Delete and fill with your own public key>"

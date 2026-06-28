@@ -53,7 +53,7 @@ pp4-valkyrie/
   - Download repo
   ```bash
   cd
-  git clone https://github.com/OnyxJeff/pp1-odin.git
+  git clone https://github.com/OnyxJeff/pp4-valkyrie.git
   ```
 ---
 
@@ -173,15 +173,12 @@ ansible --version
 
 - Generate an SSH Key Pair
 
-> [!IMPORTANT]
-> Skip to "Verify your keys" section if you imported a private key from another machine
-
 ```bash
-ssh-keygen -t ed25519 -C "Generic Homelab Key"
+ssh-keygen -t ed25519 -C "ansible-automation"
 ```
   - Explaination of flags:
     - `-t ed25519` → modern, secure key type (better than RSA)
-    - `-C "ansible@homelab"` → optional comment so you know which key it is
+    - `-C "ansible-automation"` → optional comment so you know which key it is
     - You'll see promtps like:
     `Enter file in which to save the key (/home/<USER>/.ssh/id_ed25519):`
   - Press **Enter** to accept the default location.

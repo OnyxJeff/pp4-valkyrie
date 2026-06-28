@@ -1,8 +1,0 @@
----
-- name: Install core packages on all systems
-  hosts: all
-  become: true
-  gather_facts: true
-
-  roles:
-    - common

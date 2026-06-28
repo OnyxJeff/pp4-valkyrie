@@ -1,4 +1,0 @@
-ansible
-pynetbox
-pytz
-netaddr
